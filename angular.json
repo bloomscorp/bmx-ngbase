@@ -5,9 +5,14 @@
 	"projects": {
 		"bmx-ngbase": {
 			"projectType": "library",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
 			"root": "projects/bmx-ngbase",
 			"sourceRoot": "projects/bmx-ngbase/src",
-			"prefix": "lib",
+			"prefix": "ngbase",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:ng-packagr",
