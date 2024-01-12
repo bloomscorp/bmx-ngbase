@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {isEmptyString} from "bmx-pastebox";
 
 @Injectable({
@@ -11,7 +11,10 @@ export class LocalStorageService {
 	private rootUrl: string = '/';
 
 	constructor(
+		@Inject('ROOT_URL') _rootUrl: string
 	) {
+		if (_rootUrl)
+			this.rootUrl = _rootUrl;
 	}
 
 	public store(key: string, value: string): void {

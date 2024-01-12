@@ -40,6 +40,105 @@
 					}
 				}
 			}
-		}
+    },
+    "ngbase-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngbase-demo",
+      "sourceRoot": "projects/ngbase-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/ngbase-demo",
+            "index": "projects/ngbase-demo/src/index.html",
+            "browser": "projects/ngbase-demo/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/ngbase-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ngbase-demo/src/favicon.ico",
+              "projects/ngbase-demo/src/assets"
+            ],
+            "styles": [
+              "projects/ngbase-demo/src/styles.scss"
+            ],
+            "scripts": [],
+            "server": "projects/ngbase-demo/src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "projects/ngbase-demo/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ngbase-demo:build:production"
+            },
+            "development": {
+              "buildTarget": "ngbase-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "ngbase-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/ngbase-demo/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ngbase-demo/src/favicon.ico",
+              "projects/ngbase-demo/src/assets"
+            ],
+            "styles": [
+              "projects/ngbase-demo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
 	}
 }
