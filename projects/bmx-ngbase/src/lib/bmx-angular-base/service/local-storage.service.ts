@@ -1,20 +1,23 @@
 import {Inject, Injectable} from '@angular/core';
 import {isEmptyString} from "bmx-pastebox";
+import {Constant} from "../constant";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class LocalStorageService {
 
-	private readonly _KEY_AUTH_SUCCESS_ROUTE: string = 'dhsnKJHIyhkbYRTFVjkh';
-
-	private rootUrl: string = '/';
+	private readonly authSuccessRouteKey: string = Constant.AUTH_SUCCESS_ROUTE_KEY;
+	private readonly rootUrl: string = Constant.ROOT_URL;
 
 	constructor(
-		@Inject('ROOT_URL') _rootUrl: string
+		@Inject('ROOT_URL') _rootUrl: string,
+		@Inject('AUTH_SUCCESS_ROUTE_KEY') _authSuccessRouteKey: string
 	) {
 		if (_rootUrl)
 			this.rootUrl = _rootUrl;
+		if (_authSuccessRouteKey)
+			this.authSuccessRouteKey = _authSuccessRouteKey;
 	}
 
 	public store(key: string, value: string): void {
@@ -39,11 +42,11 @@ export class LocalStorageService {
 	}
 
 	public storeOnAuthSuccessRoute(route: string): void {
-		this.store(this._KEY_AUTH_SUCCESS_ROUTE, route);
+		this.store(this.authSuccessRouteKey, route);
 	}
 
 	public retrieveOnAuthSuccessRoute(): string {
-		const route: string = this.retrieve(this._KEY_AUTH_SUCCESS_ROUTE);
+		const route: string = this.retrieve(this.authSuccessRouteKey);
 		return isEmptyString(route) ? this.rootUrl : route;
 	}
 }
