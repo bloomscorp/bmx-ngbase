@@ -1,9 +1,9 @@
 {
 	"name": "@bloomscorp/ngbase",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"peerDependencies": {
-		"@angular/common": "^18.2.1",
-		"@angular/core": "^18.2.1",
+		"@angular/common": "^19.1.4",
+		"@angular/core": "^19.1.4",
 		"bmx-pastebox": "^1.0.14"
 	},
 	"dependencies": {
