@@ -17,6 +17,8 @@ export class BmxAngularBaseModule {
 			config.rootUrl = Constant.ROOT_URL;
 		if (!config.authSuccessRouteKey)
 			config.authSuccessRouteKey = Constant.AUTH_SUCCESS_ROUTE_KEY;
+		if (!config.siteName)
+			config.siteName = Constant.SITE_NAME;
 	}
 	public static forRoot(config: NGBaseConfig): ModuleWithProviders<BmxAngularBaseModule> {
 
@@ -26,7 +28,8 @@ export class BmxAngularBaseModule {
 			ngModule: BmxAngularBaseModule,
 			providers: [
 				{ provide: 'ROOT_URL', useValue: config.rootUrl },
-				{ provide: 'AUTH_SUCCESS_ROUTE_KEY', useValue: config.authSuccessRouteKey }
+				{ provide: 'AUTH_SUCCESS_ROUTE_KEY', useValue: config.authSuccessRouteKey },
+				{ provide: 'SITE_NAME', useValue: config.siteName }
 			]
 		};
 	}

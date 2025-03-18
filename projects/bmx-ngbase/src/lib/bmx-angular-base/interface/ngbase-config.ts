@@ -1,4 +1,5 @@
 export interface NGBaseConfig {
 	rootUrl?: string;
-	authSuccessRouteKey?: string
+	authSuccessRouteKey?: string;
+	siteName?: string;
 }
