@@ -6,5 +6,5 @@ export interface FacebookSeo {
 	description: string;
 	image: FacebookImageSeo;
 	url: string;
-	siteNameContent: string;
+	siteNameContent?: string;
 }

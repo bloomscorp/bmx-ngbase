@@ -1,7 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Meta} from "@angular/platform-browser";
 import {FacebookImageSeo} from "./interface/facebook-image-seo";
 import {FacebookSeo} from "./interface/facebook-seo";
+import {isEmptyString} from "bmx-pastebox";
+import {Constant} from "../constant";
 
 @Injectable({
 	providedIn: 'root'
@@ -9,8 +11,15 @@ import {FacebookSeo} from "./interface/facebook-seo";
 export class FacebookSeoService {
 
 	constructor(
-		private _meta: Meta
+		private _meta: Meta,
+		@Inject('SITE_NAME') private _siteName: string,
 	) {
+	}
+
+	private _resolveSiteName(data: FacebookSeo): string {
+		if (!data.siteNameContent || isEmptyString(data.siteNameContent))
+			return this._siteName;
+		return data.siteNameContent;
 	}
 
 	private _setTitle(title: string): void {
@@ -97,6 +106,6 @@ export class FacebookSeoService {
 		this._setDescription(data.description);
 		this._setImage(data.image);
 		this._setUrl(data.url);
-		this._setSiteName(data.siteNameContent);
+		this._setSiteName(this._resolveSiteName(data));
 	}
 }
