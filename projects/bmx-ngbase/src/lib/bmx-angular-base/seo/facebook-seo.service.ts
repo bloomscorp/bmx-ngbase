@@ -84,10 +84,10 @@ export class FacebookSeoService {
 		});
 	}
 
-	private _setSiteName(): void {
+	private _setSiteName(content: string): void {
 		this._meta.updateTag({
 			property: 'og:site_name',
-			content: 'Delta Faucet Company India Pvt. Ltd.'
+			content: content
 		});
 	}
 
@@ -97,6 +97,6 @@ export class FacebookSeoService {
 		this._setDescription(data.description);
 		this._setImage(data.image);
 		this._setUrl(data.url);
-		this._setSiteName();
+		this._setSiteName(data.siteNameContent);
 	}
 }
